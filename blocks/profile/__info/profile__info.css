@@ -7,6 +7,6 @@
   .profile__info {
     margin: 26px 0 0;
     text-align: center;
-    transform: translateX(14px);
+    max-width: 189px;
   }
 }

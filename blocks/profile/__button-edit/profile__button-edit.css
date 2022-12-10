@@ -1,5 +1,5 @@
 .profile__button-edit {
-  background: url(../../../images/vector.png) center no-repeat;
+  background: url(../../../images/vector.svg) center no-repeat;
   background-color: transparent;
   width: 24px;
   height: 24px;
@@ -9,9 +9,10 @@
   transform: translateY(-12px);
   cursor: pointer;
   transition: .3s;
+  background-size: 10px;
 }
 .profile__button-edit:hover {
-  opacity: 0.8;
+  opacity: 0.6;
 }
 @media (max-width: 768px) {
   .profile__button-edit {
@@ -19,5 +20,6 @@
     height: 18px;
     margin: 0;
     transform: translate(113px, -46px);
+    background-size: 7.5px;
   }
 }

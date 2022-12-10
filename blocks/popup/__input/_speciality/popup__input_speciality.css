@@ -1,0 +1,8 @@
+.popup__input_speciality {
+  margin: 0 0 48px;
+}
+@media (max-width: 320px) {
+  .popup__input_speciality {
+    margin: 0 0 45px;
+  }
+}
