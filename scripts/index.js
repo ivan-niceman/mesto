@@ -4,8 +4,8 @@ const popUpClose = document.querySelector('.popup__button-close');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const popUpForm = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__input_name');
-const specialityInput = document.querySelector('.popup__input_speciality');
+const nameInput = document.querySelector('.popup__input_type_name');
+const specialityInput = document.querySelector('.popup__input_type_speciality');
 const popUpInput = document.querySelectorAll('.popup__input');
 
 function inputReturn() {
@@ -19,7 +19,6 @@ editButton.addEventListener('click', function(){
 })
 popUpClose.addEventListener('click', function(){
   popUp.classList.remove('popup_opened');
-  inputReturn();
 })
 // popUp.addEventListener('click', function(element){
 //   if(element.target == element.currentTarget) {
