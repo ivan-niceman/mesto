@@ -22,12 +22,12 @@ function openPopUp(popup) {
 
 // функция закрытия popup редактирования профиля //
 
-function closePopUpButton(popup) {
+function closePopUp(popup) {
   popup.classList.remove('popup_opened');
 }
 
 buttonPopUpCloseEdit.addEventListener('click', () =>{
-  closePopUpButton(typeEditPopUp);
+  closePopUp(typeEditPopUp);
 })
 
 buttonEdit.addEventListener('click', function(){
@@ -72,7 +72,7 @@ function zoomImage(image) {
   })
 }
 buttonCloseImage.addEventListener('click', () =>{
-  closePopUpButton(popUpImage);
+  closePopUp(popUpImage);
 })
 
 // клонируем карточки из массива initialCards //
@@ -129,7 +129,7 @@ buttonAddCard.addEventListener('click', () => {
 // закрыть typeNewCard //
 
 buttonPopUpCloseCard.addEventListener('click', () =>{
-  closePopUpButton(typeNewCard);
+  closePopUp(typeNewCard);
   cardForm.reset();
 })
 
@@ -144,7 +144,7 @@ function submitNewCardForm(event) {
   });
   cardForm.reset();
   elements.prepend(newCard);
-  closePopUpButton(typeNewCard);
+  closePopUp(typeNewCard);
 }
 
 cardForm.addEventListener('submit', submitNewCardForm);
