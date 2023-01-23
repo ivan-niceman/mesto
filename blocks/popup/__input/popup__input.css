@@ -4,8 +4,20 @@
   width: 100%;
   font-size: 14px;
   line-height: 17px;
-  padding: 0 0 8px;
+  padding: 0 0 9px;
 }
 .popup__input:focus {
   outline: none;
+}
+.popup__input::-webkit-input-placeholder {
+  color: #c4c4c4;
+}
+.popup__input::-moz-placeholder {
+  color: #c4c4c4;
+}
+.popup__input::-ms-input-placeholder {
+  color: #c4c4c4;
+}
+.popup__input::placeholder {
+  color: #c4c4c4;
 }

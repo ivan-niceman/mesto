@@ -1,3 +1,6 @@
+const popUp = document.querySelectorAll('.popup');
+const popUpInput = document.querySelectorAll('.popup__input');
+const popUpInputError = document.querySelectorAll('.popup__input-error');
 const buttonEdit = document.querySelector('.profile__button-edit');
 const typeEditPopUp = document.querySelector('.popup_type_edit');
 const buttonPopUpCloseEdit = typeEditPopUp.querySelector('.popup__button-close');
@@ -6,6 +9,7 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const formPopUpEdit = typeEditPopUp.querySelector('.popup__form');
 const nameInput = typeEditPopUp.querySelector('.popup__input_type_name');
 const specialityInput = typeEditPopUp.querySelector('.popup__input_type_speciality');
+const buttonCreateForm = document.querySelector('.popup__button-create');
 
 // функция возврата значений формы редактирования профиля //
 
@@ -18,22 +22,56 @@ function returnInput() {
 
 function openPopUp(popup) {
   popup.classList.add('popup_opened');
+  closePopUpKeyEsc(popup);
 }
 
-// функция закрытия popup редактирования профиля //
+// функция закрытия popup кнопкой esc //
+
+function closePopUpKeyEsc(popup){
+  document.addEventListener('keydown', elem => {
+    if (elem.key === 'Escape') {
+      closePopUp(popup);
+      cardForm.reset();
+    }
+  });
+}
+
+// функция закрытия popup //
 
 function closePopUp(popup) {
   popup.classList.remove('popup_opened');
+  popUpInput.forEach(elem => {
+    elem.classList.remove('popup__input_type_error');
+  })
+  popUpInputError.forEach(error => {
+    error.textContent = '';
+  })
+  buttonCreateForm.classList.add('popup__button-inactive');
 }
 
-buttonPopUpCloseEdit.addEventListener('click', () =>{
+buttonPopUpCloseEdit.addEventListener('click', () => {
   closePopUp(typeEditPopUp);
 })
 
-buttonEdit.addEventListener('click', function(){
+buttonEdit.addEventListener('click', () => {
   openPopUp(typeEditPopUp);
   returnInput();
 })
+
+// функция закрытия popup по клику за пределами окна //
+
+function closePopUpOutside() {
+  popUp.forEach(elem => {
+    elem.addEventListener('click', element => {
+      if(element.target === element.currentTarget) {
+        closePopUp(elem);
+        cardForm.reset();
+      }
+    })
+  })
+}
+
+closePopUpOutside();
 
 // функция отправки формы редактирования профиля //
 
@@ -44,6 +82,8 @@ function submitFormEdit(event) {
   typeEditPopUp.classList.remove('popup_opened');
 }
 formPopUpEdit.addEventListener('submit', submitFormEdit);
+
+// добавление карточек //
 
 const elements = document.querySelector('.elements');
 const elementsTemplate = document
@@ -71,7 +111,7 @@ function zoomImage(image) {
     openPopUp(popUpImage);
   })
 }
-buttonCloseImage.addEventListener('click', () =>{
+buttonCloseImage.addEventListener('click', () => {
   closePopUp(popUpImage);
 })
 
@@ -110,7 +150,7 @@ function createCard({link, name}) {
 // функция перебора и добавления карточек //
 
 function renderCards() {
-  initialCards.forEach(card => {
+  initialCards.forEach( (card) => {
     const cardHtml = createCard(card);
     elements.append(cardHtml);
   });
@@ -128,7 +168,7 @@ buttonAddCard.addEventListener('click', () => {
 
 // закрыть typeNewCard //
 
-buttonPopUpCloseCard.addEventListener('click', () =>{
+buttonPopUpCloseCard.addEventListener('click', () => {
   closePopUp(typeNewCard);
   cardForm.reset();
 })
@@ -150,13 +190,3 @@ function submitNewCardForm(event) {
 cardForm.addEventListener('submit', submitNewCardForm);
 
 renderCards();
-
-// function buttonPopUpCloseOutside() {
-//   popUp.addEventListener('click', function(element){
-//     if(element.target == element.currentTarget) {
-//       popUp.classList.remove('popup_opened');
-//       returnInput();
-//     }
-//   })
-// }
-// buttonPopUpCloseOutside();
