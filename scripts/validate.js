@@ -13,7 +13,7 @@ const hasInvalidInput = inputList =>{
   })
 }
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if(hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationConfig.inactiveButtonClass);
     // buttonElement.setAttribute('disabled', true);
@@ -25,14 +25,14 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass);
-  errorElement.textContent = errorMessage;
   errorElement.classList.add(validationConfig.errorClass);
+  errorElement.textContent = inputElement.validationMessage;
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);
   errorElement.classList.remove(validationConfig.errorClass);
@@ -41,9 +41,9 @@ const hideInputError = (formElement, inputElement) => {
 
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, validationConfig);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, validationConfig);
   }
 };
 
@@ -51,18 +51,18 @@ const setEventListeners = (formElement, validationConfig) => {
   const inputLists = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
 
-  toggleButtonState(inputLists, buttonElement);
+  toggleButtonState(inputLists, buttonElement, validationConfig);
 
   formElement.addEventListener('reset', () => {
     setTimeout(() => {
-      toggleButtonState(inputLists, buttonElement);
+      toggleButtonState(inputLists, buttonElement, validationConfig);
     }, 0);
   });
 
   inputLists.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputLists, buttonElement);
+      checkInputValidity(formElement, inputElement, validationConfig);
+      toggleButtonState(inputLists, buttonElement, validationConfig);
     });
   });
 };

@@ -1,13 +1,13 @@
 const popUps = document.querySelectorAll('.popup');
-const popUpInputs = document.querySelectorAll('.popup__input');
-const popUpInputsError = document.querySelectorAll('.popup__input-error');
-const buttonEdit = document.querySelector('.profile__button-edit');
 const typeEditPopUp = document.querySelector('.popup_type_edit');
+const formPopUpEdit = document.forms.editProfile;
+const popUpInputs = formPopUpEdit.querySelectorAll('.popup__input');
+const profileInputErrors = formPopUpEdit.querySelectorAll('.popup__input-error');
+const nameInput = formPopUpEdit.querySelector('.popup__input_type_name');
+const specialityInput = formPopUpEdit.querySelector('.popup__input_type_speciality');
+const buttonEdit = document.querySelector('.profile__button-edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-const formPopUpEdit = document.forms.editProfile;
-const nameInput = typeEditPopUp.querySelector('.popup__input_type_name');
-const specialityInput = typeEditPopUp.querySelector('.popup__input_type_speciality');
 
 // функция заполнения полей профиля //
 
@@ -26,7 +26,7 @@ function openPopUp(popup) {
 // функция сброса ошибок //
 
 function resetErrors() {
-  popUpInputsError.forEach(error => {
+  profileInputErrors.forEach(error => {
     error.textContent = '';
   })
   popUpInputs.forEach(elem => {
@@ -39,7 +39,6 @@ function resetErrors() {
 function closePopUp(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopUpKeyEsc);
-  resetErrors();
 }
 
 // обработчик закрытия попапа //
@@ -67,6 +66,7 @@ function closePopUpKeyEsc(evt){
 buttonEdit.addEventListener('click', () => {
   openPopUp(typeEditPopUp);
   fillProfileInputs();
+  resetErrors();
 })
 
 // функция отправки формы редактирования профиля //
@@ -75,8 +75,7 @@ function submitFormEdit(event) {
   event.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = specialityInput.value;
-  const opendPopUp = document.querySelector('.popup_opened');
-  closePopUp(opendPopUp);
+  closePopUp(typeEditPopUp);
 }
 formPopUpEdit.addEventListener('submit', submitFormEdit);
 
@@ -89,13 +88,12 @@ const elementsTemplate = document
   .querySelector('.element');
 
 const cardForm = document.forms.newCard;
-const cardInput = document.querySelector('.popup__input_type_name-card');
-const cardLink = document.querySelector('.popup__input_type_link');
+const cardInput = cardForm.querySelector('.popup__input_type_name-card');
+const cardLink = cardForm.querySelector('.popup__input_type_link');
 
 const figurePopUpImage = document.querySelector('.popup__image-figure');
 const namePopUpImage = document.querySelector('.popup__image-name');
 const popUpImage = document.querySelector('.popup_type_image');
-const buttonCloseImage = popUpImage.querySelector('.popup__button-close-image');
 
 // функция увеличения карточки //
 
@@ -108,9 +106,6 @@ function zoomImage(image) {
     openPopUp(popUpImage);
   })
 }
-buttonCloseImage.addEventListener('click', () => {
-  closePopUp(popUpImage);
-})
 
 // клонируем карточки из массива initialCards //
 
@@ -155,18 +150,11 @@ function renderCards() {
 
 const buttonAddCard = document.querySelector('.profile__button-add');
 const typeNewCard = document.querySelector('.popup_type_new-card');
-const buttonPopUpCloseCard = typeNewCard.querySelector('.popup__button-close-card');
 
 // открыть typeNewCard //
 
 buttonAddCard.addEventListener('click', () => {
   openPopUp(typeNewCard);
-})
-
-// закрыть typeNewCard //
-
-buttonPopUpCloseCard.addEventListener('click', () => {
-  closePopUp(typeNewCard);
 })
 
 // функция добавления карточки //
