@@ -29,6 +29,7 @@
   <footer class="footer">
     <p class="footer__copyryght">© 2022 Mesto Russia</p>
   </footer>
+
   <section class="popup popup_type_edit">
     <div class="popup__container">
       <button aria-label="закрыть" type="button" class="popup__button-close"></button>
@@ -60,7 +61,7 @@
           <input type="url" name="link-image" placeholder="Ссылка на картинку" class="popup__input popup__input_type_speciality popup__input_type_link" id="image-link-input" required>
           <span class="popup__input-error image-link-input-error"></span>
         </label>
-        <button aria-label="создать" class="popup__button-save popup__button-create">Создать</button>
+        <button aria-label="создать" class="popup__button-save popup__button-create popup__button-inactive">Создать</button>
       </form>
     </div>
   </section>
@@ -78,13 +79,12 @@
       <img src="#" alt="" class="element__image">
       <button aria-label="корзина" type="button" class="element__trash"></button>
       <div class="element__group">
-        <h3 class="element__subtitle"></h3>
+        <h3 class="element__title"></h3>
         <button aria-label="лайк" type="button" class="element__like"></button>
       </div>
     </li>
   </template>
-  <script src="./scripts/validate.js"></script>
-  <script src="./scripts/cards.js"></script>
-  <script src="./scripts/index.js"></script>
+
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
