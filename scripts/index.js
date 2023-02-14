@@ -140,7 +140,8 @@ function zoomImage(name, link) {
   openPopUp(popUpImage);
 }
 
-function createCard() {
+function createCard(evt) {
+  evt.preventDefault;
   const newCard = {
     name: cardInput.value,
     link: cardLink.value,
