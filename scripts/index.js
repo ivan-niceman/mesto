@@ -4,8 +4,8 @@ import FormValidator from './FormValidator.js';
 const formPopUpEdit = document.forms.editProfile;
 const popUps = document.querySelectorAll('.popup');
 const typeEditPopUp = document.querySelector('.popup_type_edit');
-const popUpInputs = formPopUpEdit.querySelectorAll('.popup__input');
-const profileInputErrors = formPopUpEdit.querySelectorAll('.popup__input-error');
+// const popUpInputs = formPopUpEdit.querySelectorAll('.popup__input');
+// const profileInputErrors = formPopUpEdit.querySelectorAll('.popup__input-error');
 const nameInput = formPopUpEdit.querySelector('.popup__input_type_name');
 const specialityInput = formPopUpEdit.querySelector('.popup__input_type_speciality');
 
@@ -23,7 +23,24 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const buttonAddCard = document.querySelector('.profile__button-add');
 
+const forms = document.querySelectorAll('form');
+// const forms = document.querySelector('form');
+
+// forms.addEventListener('submit', evt => {
+//   evt.preventDefault();
+// })
+
+forms.forEach(form => {
+  form.addEventListener('submit', evt => {
+    evt.preventDefault();
+  })
+})
+
 const initialCards = [
+  {
+    name: 'Flamingo',
+    link: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1936&q=80'
+  },
   {
     name: 'Palms',
     link: 'https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGJlYWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
@@ -43,10 +60,6 @@ const initialCards = [
   {
     name: 'Cancun',
     link: 'https://images.unsplash.com/flagged/photo-1557533046-154fc97b729f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-  },
-  {
-    name: 'Flamingo',
-    link: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1936&q=80'
   }
 ];
 
@@ -66,14 +79,14 @@ function openPopUp(popup) {
 
 // функция сброса ошибок //
 
-function resetErrors() {
-  profileInputErrors.forEach(error => {
-    error.textContent = '';
-  })
-  popUpInputs.forEach(elem => {
-    elem.classList.remove('popup__input_type_error');
-  })
-}
+// function resetErrors() {
+//   profileInputErrors.forEach(error => {
+//     error.textContent = '';
+//   })
+//   popUpInputs.forEach(elem => {
+//     elem.classList.remove('popup__input_type_error');
+//   })
+// }
 
 // функция закрытия popup //
 
@@ -109,27 +122,47 @@ buttonAddCard.addEventListener('click', () => {
 buttonEdit.addEventListener('click', () => {
   openPopUp(typeEditPopUp);
   fillProfileInputs();
-  resetErrors();
 })
 
 // функция отправки формы редактирования профиля //
 
-function submitFormEdit(event) {
-  event.preventDefault();
+function submitFormEdit(evt) {
+  evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = specialityInput.value;
   closePopUp(typeEditPopUp);
 }
 formPopUpEdit.addEventListener('submit', submitFormEdit);
 
-function addCard(data, container, cardSelector) {
-  const cardElement = new Card(data, cardSelector, zoomImage).generateCard();
+function createCard(item) {
+  const cardElement = new Card(item, '.elements-template', zoomImage).generateCard();
+  return cardElement;
+}
+
+// функция отправки формы добавления карточки //
+
+function handleCard(evt) {
+  evt.preventDefault();
+  const newCard = {
+    name: cardInput.value,
+    link: cardLink.value,
+  }
+  const cardElement = createCard(newCard);
+  elements.prepend(cardElement);
+  cardForm.reset();
+  closePopUp(typeNewCard);
+}
+cardForm.addEventListener('submit', handleCard);
+
+
+function addCard(data, container) {
+  const cardElement = createCard(data);
   container.prepend(cardElement);
 }
 
 function renderCards() {
-  initialCards.forEach(card => {
-    addCard(card, elements, '.elements-template');
+  initialCards.reverse().forEach(card => {
+    addCard(card, elements, zoomImage);
   });
 }
 
@@ -139,18 +172,6 @@ function zoomImage(name, link) {
   namePopUpImage.textContent = name;
   openPopUp(popUpImage);
 }
-
-function createCard(evt) {
-  evt.preventDefault;
-  const newCard = {
-    name: cardInput.value,
-    link: cardLink.value,
-  }
-  addCard(newCard, elements, '.elements-template');
-  cardForm.reset();
-  closePopUp(typeNewCard);
-}
-cardForm.addEventListener('submit', createCard)
 
 const validationConfig = {
   formSelector: '.popup__form',
