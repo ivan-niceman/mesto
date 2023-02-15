@@ -4,8 +4,6 @@ import FormValidator from './FormValidator.js';
 const formPopUpEdit = document.forms.editProfile;
 const popUps = document.querySelectorAll('.popup');
 const typeEditPopUp = document.querySelector('.popup_type_edit');
-// const popUpInputs = formPopUpEdit.querySelectorAll('.popup__input');
-// const profileInputErrors = formPopUpEdit.querySelectorAll('.popup__input-error');
 const nameInput = formPopUpEdit.querySelector('.popup__input_type_name');
 const specialityInput = formPopUpEdit.querySelector('.popup__input_type_speciality');
 
@@ -22,19 +20,6 @@ const buttonEdit = document.querySelector('.profile__button-edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const buttonAddCard = document.querySelector('.profile__button-add');
-
-const forms = document.querySelectorAll('form');
-// const forms = document.querySelector('form');
-
-// forms.addEventListener('submit', evt => {
-//   evt.preventDefault();
-// })
-
-forms.forEach(form => {
-  form.addEventListener('submit', evt => {
-    evt.preventDefault();
-  })
-})
 
 const initialCards = [
   {
@@ -76,17 +61,6 @@ function openPopUp(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopUpKeyEsc);
 }
-
-// функция сброса ошибок //
-
-// function resetErrors() {
-//   profileInputErrors.forEach(error => {
-//     error.textContent = '';
-//   })
-//   popUpInputs.forEach(elem => {
-//     elem.classList.remove('popup__input_type_error');
-//   })
-// }
 
 // функция закрытия popup //
 
