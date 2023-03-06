@@ -1,9 +1,15 @@
 export default class Card {
-  constructor(data, templateSelector, zoomImage) {
+  constructor({data, zoomImage}, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._zoomImage = zoomImage;
+
+    this._card = this._getElement();
+    this._cardLike = this._card.querySelector('.element__like');
+    this._cardTrash = this._card.querySelector('.element__trash');
+    this._cardImage = this._card.querySelector('.element__image');
+    this._cardTitle = this._card.querySelector('.element__title');
   }
 
   _getElement() {
@@ -26,18 +32,12 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardLike = this._card.querySelector('.element__like');
-    this._cardTrash = this._card.querySelector('.element__trash');
-    this._cardImage = this._card.querySelector('.element__image');
-    this._cardTitle = this._card.querySelector('.element__title');
-
     this._cardLike.addEventListener('click', () => this._toggleLike());
     this._cardTrash.addEventListener('click', () => this._deleteCard());
     this._cardImage.addEventListener('click', () => this._zoomImage(this._name, this._link));
   }
 
   generateCard() {
-    this._card = this._getElement();
     this._setEventListeners();
 
     this._cardImage.src = this._link;

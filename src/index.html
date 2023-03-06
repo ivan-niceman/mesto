@@ -5,15 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
   <header class="header">
-    <img src="./images/logo.svg" alt="логотип Место Россия" class="header__logo">
+    <img src="<%=require('./images/logo.svg')%>" alt="логотип Место Россия" class="header__logo">
   </header>
   <main>
     <section class="profile">
-      <img src="./images/Cousteau.jpg" alt="Жак Ив Кусто" class="profile__avatar">
+      <img src="<%=require('./images/Cousteau.jpg')%>" alt="Жак Ив Кусто" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__title">Жак-Ив Кусто</h1>
         <h2 class="profile__subtitle">Исследователь океана</h2>
@@ -27,7 +26,7 @@
 
   </main>
   <footer class="footer">
-    <p class="footer__copyryght">© 2022 Mesto Russia</p>
+    <p class="footer__copyryght">© 2023 Mesto Russia</p>
   </footer>
 
   <section class="popup popup_type_edit">
@@ -85,6 +84,5 @@
     </li>
   </template>
 
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
