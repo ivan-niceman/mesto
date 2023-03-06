@@ -6,7 +6,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import { initialCards, validationConfig } from '../components/utils/constants.js';
+import { initialCards, validationConfig } from '../utils/constants.js';
 
 const formPopUpEdit = document.forms.editProfile;
 const nameInput = formPopUpEdit.querySelector('.popup__input_type_name');
