@@ -29,6 +29,10 @@ export default class Card {
   _deleteCard() {
     this._card.remove();
     this._card = null;
+    this._cardLike = null;
+    this._cardTrash = null;
+    this._cardImage = null;
+    this._cardTitle = null;
   }
 
   _setEventListeners() {

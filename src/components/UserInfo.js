@@ -5,15 +5,14 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    this._userData = {
+    return {
       name: this._profileName.textContent,
       info: this._profileInfo.textContent
     }
-    return this._userData
   }
 
-  setUserInfo(profileNameInput, profileAboutInput) {
-    this._profileName.textContent = profileNameInput.value;
-    this._profileInfo.textContent = profileAboutInput.value;
+  setUserInfo(userName, userInfo) {
+    this._profileName.textContent = userName.value;
+    this._profileInfo.textContent = userInfo.value;
   }
 }
