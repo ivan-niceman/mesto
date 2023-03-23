@@ -126,7 +126,7 @@ function myProfile(data) {
     .createNewProfile(data)
     .then((item) => {
       userInfo.setUserInfo(item);
-      // formProfile.close();
+      formProfile.close();
     })
     .catch((err) => {
       console.log(err);
