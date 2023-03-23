@@ -51,6 +51,12 @@ Promise.all([api.getCards(), api.getCurrentUser()])
     console.log(err);
   });
 
+  const userInfo = new UserInfo({
+    name: '.profile__title',
+    about: '.profile__subtitle',
+    avatar: '.profile__avatar'
+  });
+
 const cardList  = new Section({
   renderer: item => {
     const cardElement = createCard(item);
@@ -103,12 +109,6 @@ function likeMyCard(id, cardElement) {
     });
 }
 
-const userInfo = new UserInfo({
-  name: '.profile__title',
-  about: '.profile__subtitle',
-  avatar: '.profile__avatar'
-});
-
 function deletelikeMyCard(id, cardElement) {
   api
     .deleteLike(id)
@@ -126,7 +126,7 @@ function myProfile(data) {
     .createNewProfile(data)
     .then((item) => {
       userInfo.setUserInfo(item);
-      formProfile.close();
+      // formProfile.close();
     })
     .catch((err) => {
       console.log(err);
