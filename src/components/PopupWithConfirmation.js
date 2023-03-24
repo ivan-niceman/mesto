@@ -9,8 +9,8 @@ export default class PopupWithConfirmation extends Popup {
     this._buttonSubmitText = this._buttonSubmit.textContent;
   }
 
-  changeSubmitHandler(item) {
-    this._deleteMyCard = item;
+  changeSubmitHandler(handler) {
+    this._deleteMyCard = handler;
   }
 
   setEventListeners() {
@@ -23,7 +23,7 @@ export default class PopupWithConfirmation extends Popup {
 
   renderLoadingDelete(isLoading) {
     if (isLoading) {
-      this._buttonSubmit.textContent = "Сохранение...";
+      this._buttonSubmit.textContent = "Удаление...";
     } else {
       this._buttonSubmit.textContent = this._buttonSubmitText;
     }

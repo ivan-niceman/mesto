@@ -30,8 +30,8 @@ validationCardForm.toggleButtonState();
 validationAvatarForm.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
-const formProfile = new PopupWithForm('.popup_type_edit', myProfile);
-const formAvatar = new PopupWithForm('.popup_type_change-avatar', myAvatar);
+const formProfile = new PopupWithForm('.popup_type_edit', profileCard);
+const formAvatar = new PopupWithForm('.popup_type_change-avatar', profileAvatar);
 const cardDelete = new PopupWithConfirmation('.popup_type_delete-card');
 
 let userId;
@@ -120,7 +120,7 @@ function deletelikeMyCard(id, cardElement) {
     });
 }
 
-function myProfile(data) {
+function profileCard(data) {
   formProfile.renderLoadingSave(true);
   api
     .createNewProfile(data)
@@ -136,7 +136,7 @@ function myProfile(data) {
     });
 }
 
-function myAvatar(data) {
+function profileAvatar(data) {
   formAvatar.renderLoadingSave(true);
   api
     .createNewAvatar(data)
@@ -176,10 +176,12 @@ cardDelete.setEventListeners();
 popupFormAddCard.setEventListeners();
 
 buttonAddCard.addEventListener('click', () => {
+  validationCardForm.resetValidation();
   popupFormAddCard.open();
 })
 
 buttonEdit.addEventListener('click', (evt) => {
+  validationProfileForm.resetValidation();
   evt.preventDefault;
   const userProfile = userInfo.getUserInfo();
   nameInput.value = userProfile.name;
@@ -188,5 +190,6 @@ buttonEdit.addEventListener('click', (evt) => {
 })
 
 buttonEditAvatar.addEventListener('click', () => {
+  validationAvatarForm.resetValidation();
   formAvatar.open();
 })
