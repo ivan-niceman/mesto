@@ -30,8 +30,8 @@ validationCardForm.toggleButtonState();
 validationAvatarForm.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
-const formProfile = new PopupWithForm('.popup_type_edit', profileCard);
-const formAvatar = new PopupWithForm('.popup_type_change-avatar', profileAvatar);
+const formProfile = new PopupWithForm('.popup_type_edit', editProfileCard);
+const formAvatar = new PopupWithForm('.popup_type_change-avatar', editProfileAvatar);
 const cardDelete = new PopupWithConfirmation('.popup_type_delete-card');
 
 let userId;
@@ -120,7 +120,7 @@ function deletelikeMyCard(id, cardElement) {
     });
 }
 
-function profileCard(data) {
+function editProfileCard(data) {
   formProfile.renderLoadingSave(true);
   api
     .createNewProfile(data)
@@ -136,7 +136,7 @@ function profileCard(data) {
     });
 }
 
-function profileAvatar(data) {
+function editProfileAvatar(data) {
   formAvatar.renderLoadingSave(true);
   api
     .createNewAvatar(data)
